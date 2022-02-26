@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "build": "cd client && npm install && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-contracts": "sol-merger \"./contracts/*.sol\" ./build"
   },
   "keywords": [],
   "author": "",
