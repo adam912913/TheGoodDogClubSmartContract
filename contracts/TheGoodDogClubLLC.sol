@@ -58,8 +58,8 @@ contract TheGoodDogClubLLC is ERC721, Ownable, ReentrancyGuard {
     uint256 public mintPricePublicSale = 0.14 ether;
 
     // BaseURI (real, placeholder)
-    string private realBaseURI = "https://gateway.pinata.cloud/ipfs/QmSE2hHFRY72qer1AoaNSutKRywjs6hb72Q3QyQQ4A2deu/";
-    string private placeholderBaseURI = "https://gateway.pinata.cloud/ipfs/QmSE2hHFRY72qer1AoaNSutKRywjs6hb72Q3QyQQ4A2deu/";
+    string private realBaseURI = "https://tgdcalllen.mypinata.cloud/ipfs/QmR1CfaRCSFTicVc1sctcTDEaMp1hg7eFMZHYhzCLRnZvp/";
+    string private placeholderBaseURI = "https://tgdcalllen.mypinata.cloud/ipfs/QmR1CfaRCSFTicVc1sctcTDEaMp1hg7eFMZHYhzCLRnZvp/";
 
     constructor() ERC721("TheGoodDogClubLLC", "TGDC") {
         teamWalletPercent[teamWalletList[0]] = 682; // The Good Dog Club LLC percent

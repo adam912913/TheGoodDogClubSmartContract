@@ -13,7 +13,7 @@ const dir_metadata = './assets/metadata/';
 const art_extension = 'gif';
 const conf_upload_arts_pinata = './assets/config/conf_upload_arts_pinata.json';
 const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-const gateway_url = "https://gateway.pinata.cloud/ipfs/";
+const gateway_url = "https://tgdcalllen.mypinata.cloud/ipfs/";
 
 function naturalCompare(a, b) {
   var ax = [], bx = [];
@@ -33,8 +33,9 @@ function naturalCompare(a, b) {
 
 upload_item = async (art_file_name, art_key, upload_status) => {
   try {
-    let metadata_file_path = dir_metadata + art_key + '.json';
+    let metadata_file_path = dir_metadata + 'Erc721_Data_' + art_key + '.json';
     if (fs.existsSync(metadata_file_path)) {
+      console.log(metadata_file_path)
       print_current_time();
       // let art_file_name = dir_arts + art_key + '.' + art_extension;
       let art_file_path = dir_arts + art_file_name;
@@ -55,6 +56,17 @@ upload_item = async (art_file_name, art_key, upload_status) => {
         let images_hash = response.data.IpfsHash;
         let cur_art_metadata = JSON.parse(fs.readFileSync(metadata_file_path));
         cur_art_metadata.image = gateway_url + images_hash;
+
+        cur_art_metadata.Properties = {
+          "files": [
+            {
+              "uri": "image.gif",
+              "type": "image/gif"
+            }
+          ],
+          "category": "image"
+        };
+        cur_art_metadata.description = "The Good Dog Club #" + art_key;
 
         fs.writeFileSync(metadata_file_path, JSON.stringify(cur_art_metadata, null, '\t'));
 
@@ -121,7 +133,7 @@ upload_arts = async () => {
         let art_file_path = files[i];
         var splitted = art_file_path.split("/");
         art_file_name = splitted[splitted.length - 1];
-        art_key = parseInt(art_file_name.slice(0, art_file_name.indexOf('.', -1)));
+        art_key = parseInt(art_file_name.slice(5, art_file_name.indexOf('.', -1)));
         let upload_status = JSON.parse(fs.readFileSync(conf_upload_arts_pinata));
         var found = upload_status.uploaded_art_keys.find(element => element === art_key);
         if (found === undefined) {
